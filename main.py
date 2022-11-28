@@ -1,6 +1,8 @@
 import random
 import os
 from os import sys
+import guess_given as guess_given
+import listupdate as listupdate
 
 lines = []
 guesses = []
@@ -8,9 +10,7 @@ correct_g = []
 incorrect_g = []
 incorrect_amount = 0
 newguess = ""
-
-# def guess(sol, guessed_incorrect, guessed_correct):
-
+current_status = {}
 
 with open(os.path.join(sys.path[0], "magyar_latin2.txt"), "r") as file:  # read file
     lines = [line.rstrip() for line in file]  # make all lines into an argument in the list
