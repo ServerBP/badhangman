@@ -1,0 +1,2 @@
+err0 :
+err1 : The user has already guessed this letter. Returned by guess_given.py "guess" function.

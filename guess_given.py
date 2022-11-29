@@ -1,5 +1,6 @@
-def guess(guess, answer, current_status, guessed, loa):
-
+def guess(guess, answer, current_status, guessed):
+    if guess in guessed:
+        return "err1"
     if guess in answer:
         guessed.append(guess)
         l = 0
