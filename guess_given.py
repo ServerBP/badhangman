@@ -1,21 +1,23 @@
-def guess(guess, answer, current_status, guessed, loa, already_solved):
+def guess(guess, answer, current_status, guessed, loa):
 
     if guess in answer:
         guessed.append(guess)
         l = 0
         indexes = [i for i, c in enumerate(answer) if c == guess]
-        print(indexes)
-        print(len(indexes))
         while l <= len(indexes)-1:
-            already_solved.update({indexes[l]: guess})
+            current_status.update({indexes[l]: guess})
             l = l+1
-        print(already_solved)
+    return current_status
 
 
 s = "apple"
-g = "l"
-alr = {0: "a"}
+g = "p"
 loa = "loa"
-cs = "status"
+cs = {0: "_", 1: "_", 2: "_", 3: "_", 4: "_", }
 guessed = ['']
-guess(g, s, cs, guessed, loa, alr)
+cs = guess(g, s, cs, guessed, loa)
+solstring = ''.join(cs.values())
+print(solstring)
+cs = guess("a", s, cs, guessed, loa)
+solstring = ''.join(cs.values())
+print(solstring)
