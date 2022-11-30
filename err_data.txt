@@ -1,2 +1,3 @@
-err0 :
+err0 : No errors thrown
 err1 : The user has already guessed this letter. Returned by guess_given.py "guess" function.
+err2 : The letter is not in the word.

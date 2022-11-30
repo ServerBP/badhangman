@@ -1,10 +1,11 @@
 import random
 import os
 from os import sys
-import guess_given as guess_given
+import guess_given as gg
 
 lines = []
 guesses = []
+correct_guesses = []
 incorrect_amount = 0
 newguess = ""
 current_status = {}
@@ -27,20 +28,44 @@ print(current_status)
 
 # startup info given to user
 print("Bad akasztofa game \nTry to guess the word by guessing characters 1 by 1.")
-newguess = input("We have chosen a word. This word is " + str(wlength) + " characters long. Take your first guess: ")
 print(initialword)
+print("We have chosen a word. This word is " + str(wlength) + " characters long. lets start the game by you guessing a letter!")
 
-# player takes their first guess
-if len(newguess) != 1:  # checking if its the correct character count
-    print("Please try again. You may only guess 1 character at a time")
-guess_given.guess(newguess, initialword, current_status, guesses)
 
 input_correct_format = False
 
 while flag == 0:
     while input_correct_format == False:
-        newguess = input("Take a guess (another character): ")
+        newguess = input("Your turn (guess a letter): ")
         if len(newguess) != 1:  # checking if its the correct character count
             print("Please try again. You may only guess 1 character at a time")
-        current_status = guess_given.guess(newguess, initialword, current_status, guesses)
+            break
+        if newguess in initialword:
+            cs2 = {}
+            cs3 = current_status
+            currentword = ""
+            i = 0
+            l= 0
+            j = -1
+            for i in list_of_available:
+                j += 1
+                currentWord = list_of_available[j]
+                for index in range(len(currentWord)):
+                    cs2.update({index: '_'})
+                    indexes = [i for i, c in enumerate(initialword) if c == newguess]
 
+                while l <= len(indexes)-1:
+                    cs3.update({indexes[l]: newguess})
+                    l = l+1
+                while l <= len(indexes)-1:
+                    cs2.update({indexes[l]: newguess})
+                    l = l+1
+
+                if cs2.values() != current_status.values():
+                    list_of_available.remove(currentWord)
+            print(list_of_available)
+                
+        msg, current_status, guesses, correct_guesses = gg.guess(newguess, initialword, current_status, guesses, correct_guesses)
+        if msg == "err1":
+            print("You have already guessed this letter. Try again!")
+            break
